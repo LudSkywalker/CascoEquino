@@ -56,5 +56,5 @@ func _on_ui_clip_limb(cliped: bool) -> void:
 
 
 func _on_ui_hover_menu(hover: bool) -> void:
-	print(hover)
+	# print(hover)
 	hover_menu = hover

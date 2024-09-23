@@ -40,10 +40,10 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 	clip_limb.emit(toggled_on)
 
 
-func _on_layers_container_gui_input(_event: InputEvent) -> void:
+func _on_layers_container_mouse_entered() -> void:
 	hover_menu.emit(true)
-	timer.start()
 
 
-func _on_timer_timeout() -> void:
+func _on_layers_container_mouse_exited() -> void:
 	hover_menu.emit(false)
+	
