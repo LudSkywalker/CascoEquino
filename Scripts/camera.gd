@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 			rotation_clicked = true
 		else:
 			rotation_clicked = false
-	if event is InputEventMouseMotion || event is InputEventScreenTouch:
+	if (event is InputEventMouseMotion || event is InputEventScreenTouch) && !hover_menu:
 		if !cliped_clicked && rotation_clicked:
 			rotate_object_local(Vector3.UP, event.relative.x * -0.01)
 			rotate_object_local(Vector3.FORWARD, event.relative.y * -0.005)
@@ -56,4 +56,5 @@ func _on_ui_clip_limb(cliped: bool) -> void:
 
 
 func _on_ui_hover_menu(hover: bool) -> void:
+	print(hover)
 	hover_menu = hover
