@@ -49,5 +49,6 @@ transform = Transform3D(-0.0913891, -0.632219, 0.769381, -0.0745723, 0.77479, 0.
 unique_name_in_owner = true
 
 [connection signal="clip_limb" from="UI" to="CameraRoot" method="_on_ui_clip_limb"]
+[connection signal="hover_menu" from="UI" to="CameraRoot" method="_on_ui_hover_menu"]
 
 [editable path="cascoEquino"]

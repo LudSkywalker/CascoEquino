@@ -4,6 +4,7 @@ extends Node3D
 
 @export var layer_name_path: PackedScene
 
+var hover_menu: bool = false
 var rotation_clicked: bool = false
 var cliped_clicked: bool = false
 var word_space
@@ -15,7 +16,7 @@ func _ready():
 	self.add_child(label_piece)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton && !hover_menu:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			rotation_clicked = true
 		else:
@@ -52,3 +53,7 @@ func _on_ui_clip_limb(cliped: bool) -> void:
 	else:
 		camera.near = 0.1
 		cliped_clicked = false
+
+
+func _on_ui_hover_menu(hover: bool) -> void:
+	hover_menu = hover

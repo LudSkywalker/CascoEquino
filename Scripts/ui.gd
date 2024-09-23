@@ -1,11 +1,13 @@
 extends Control
 class_name UI
 
-signal clip_limb
+signal clip_limb(toggled_on: bool)
+signal hover_menu(hover: bool)
 
 @onready var layers: VBoxContainer = %Layers
 @onready var label: Label = %Label
 @onready var check_box: CheckBox = %CheckBox
+@onready var timer: Timer = %Timer
 
 @export var visibility_togle_scene: PackedScene
 @export var visual_font_size: int = 23
@@ -36,3 +38,12 @@ func _on_label_resized() -> void:
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	clip_limb.emit(toggled_on)
+
+
+func _on_layers_container_gui_input(_event: InputEvent) -> void:
+	hover_menu.emit(true)
+	timer.start()
+
+
+func _on_timer_timeout() -> void:
+	hover_menu.emit(false)
