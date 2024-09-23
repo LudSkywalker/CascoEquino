@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dv2rx7nv48frv"]
+
+[ext_resource type="Script" path="res://Scripts/program.gd" id="1_44dt3"]
+[ext_resource type="PackedScene" uid="uid://bx1081ff64b3c" path="res://Models/cascoEquino.blend" id="1_k6ih3"]
+[ext_resource type="Shader" path="res://Shaders/stripped.gdshader" id="2_1x1lf"]
+[ext_resource type="Script" path="res://Scripts/camera.gd" id="2_c37lv"]
+[ext_resource type="PackedScene" uid="uid://trroxj8hjtmo" path="res://Scenes/Ui.tscn" id="4_4l2qg"]
+[ext_resource type="PackedScene" uid="uid://cks60ah1lax5x" path="res://Scenes/LayerName.tscn" id="5_6pt06"]
+
+[sub_resource type="Environment" id="Environment_tiq3b"]
+background_mode = 1
+background_color = Color(0.512729, 0.670839, 0.69702, 1)
+ambient_light_energy = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ps3bj"]
+render_priority = 0
+shader = ExtResource("2_1x1lf")
+shader_parameter/color_gap = Color(0.41223, 4.33177e-07, 0.198992, 1)
+shader_parameter/color_stripe = Color(0.888807, 7.79718e-06, 0.58426, 1)
+shader_parameter/divisions = 10.0
+shader_parameter/stripe_bias = 2.5
+
+[node name="Program" type="Node3D"]
+script = ExtResource("1_44dt3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tiq3b")
+
+[node name="cascoEquino" parent="." instance=ExtResource("1_k6ih3")]
+unique_name_in_owner = true
+
+[node name="3_Láminas de la pared" parent="cascoEquino" index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_ps3bj")
+
+[node name="CameraRoot" type="Node3D" parent="."]
+script = ExtResource("2_c37lv")
+layer_name_path = ExtResource("5_6pt06")
+
+[node name="Camera" type="Camera3D" parent="CameraRoot"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 2, 0)
+fov = 45.0
+size = 7.221
+near = 0.1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraRoot"]
+transform = Transform3D(-0.0913891, -0.632219, 0.769381, -0.0745723, 0.77479, 0.627806, -0.993019, 9.58576e-08, -0.117953, 12.5882, 1.85703, 0)
+
+[node name="UI" parent="." instance=ExtResource("4_4l2qg")]
+unique_name_in_owner = true
+
+[connection signal="clip_limb" from="UI" to="CameraRoot" method="_on_ui_clip_limb"]
+
+[editable path="cascoEquino"]
