@@ -26,7 +26,7 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 
 
 func _on_label_resized() -> void:
-	font_size = (visual_font_size * 4.0 / DisplayServer.window_get_size().x + visual_font_size * 0.25 / DisplayServer.window_get_size().y) * 700.0
+	font_size = (visual_font_size * 3.0 / DisplayServer.window_get_size().x + visual_font_size * 0.5 / DisplayServer.window_get_size().y) * 700.0
 	if label:
 		label.add_theme_font_size_override("font_size", int(font_size))
 	if check_box:
